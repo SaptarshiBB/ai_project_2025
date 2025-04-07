@@ -4,20 +4,20 @@ import google.generativeai as genai
 import logging
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
+CORS(app)  
 
-# Configure logging
+
 logging.basicConfig(level=logging.DEBUG)
 
-# Configure Gemini API - PUT YOUR API KEY HERE
-genai.configure(api_key="")  # ⚠️ Replace with your actual API key
 
-# Initialize the Gemini 1.5 model
-model = genai.GenerativeModel('gemini-1.5-pro-latest')  # Updated to use 1.5 model
+genai.configure(api_key="")  #put the api key here personal key not for share
 
-# Allowed topics
+
+model = genai.GenerativeModel('gemini-1.5-pro-latest')  # i am using gemini 1.5 pro model which is avaliable you can use what you like 
+
+
 ALLOWED_TOPICS = {
-    # Core Cleanup Terms (50+)
+   
     "clean","cleanup", "clean-up", "community cleanup", "neighborhood cleanup", "beach cleanup", 
     "river cleanup", "park cleanup", "street cleaning", "highway cleanup", "lake cleanup",
     "forest cleanup", "underwater cleanup", "mountain cleanup", "desert cleanup", 
@@ -32,7 +32,6 @@ ALLOWED_TOPICS = {
     "environmental sanitation", "neighborhood revitalization", "blight removal",
     "brownfield restoration", "ecosystem restoration", "habitat cleanup",
 
-    # Waste Categories (40+)
     "trash", "litter", "garbage", "refuse", "rubbish", "debris", "waste", "junk",
     "plastic waste", "food waste", "organic waste", "yard waste", "construction waste",
     "electronic waste", "hazardous waste", "household waste", "industrial waste",
@@ -44,7 +43,7 @@ ALLOWED_TOPICS = {
     "hazardous household waste", "paint disposal", "battery recycling",
     "oil disposal", "chemical waste", "asbestos removal","roadside waste","roadside dump",
 
-    # Recycling & Waste Management (50+)
+   
     "recycling", "upcycling", "downcycling", "composting", "vermicomposting",
     "waste management", "waste reduction", "waste audit", "zero waste",
     "circular economy", "source reduction", "reuse", "repair", "refill",
@@ -59,7 +58,7 @@ ALLOWED_TOPICS = {
     "waste characterization", "waste composition", "diversion rate", "MRF",
     "transfer station", "sanitary landfill", "leachate", "methane capture",
 
-    # Environmental Issues (40+)
+   
     "pollution", "littering", "illegal dumping", "fly-tipping", "marine pollution",
     "plastic pollution", "water pollution", "air pollution", "soil contamination",
     "noise pollution", "light pollution", "thermal pollution", "nutrient pollution",
@@ -72,7 +71,6 @@ ALLOWED_TOPICS = {
     "biodiversity loss", "invasive species", "species extinction", "ecosystem collapse",
     "environmental degradation", "resource depletion", "overshoot day",
 
-    # Sustainability (40+)
     "sustainability", "sustainable development", "green living", "eco-friendly",
     "environmentally friendly", "carbon footprint", "ecological footprint",
     "water footprint", "energy conservation", "water conservation", "resource efficiency",
@@ -85,7 +83,7 @@ ALLOWED_TOPICS = {
     "sustainable fashion", "ethical consumerism", "minimalism", "simple living",
     "voluntary simplicity", "degrowth", "steady state economy",
 
-    # Community & Policy (40+)
+    
     "community engagement", "civic participation", "volunteerism", "service learning",
     "corporate volunteering", "employee engagement", "team building", "youth programs",
     "school programs", "scouts", "girl scouts", "boy scouts", "4-H", "rotary",
@@ -100,7 +98,7 @@ ALLOWED_TOPICS = {
     "transit-oriented development", "walkability", "bikeability", "green infrastructure",
     "low impact development", "sponge cities",
 
-    # Tools & Equipment (30+)
+   
     "litter pickers", "grabbers", "gloves", "safety vests", "reflective gear",
     "trash bags", "recycling bins", "compost bins", "wheelbarrows", "rakes",
     "brooms", "shovels", "hoes", "trowels", "pruners", "hedge trimmers",
@@ -111,7 +109,6 @@ ALLOWED_TOPICS = {
     "work boots", "high-visibility clothing", "weather radios", "trash skimmers",
     "waterway cleanup tools", "beach rakes", "sand sifters","dustbins","hand gloves",
 
-    # Events & Campaigns (30+)
     "Earth Day", "World Cleanup Day", "Coastal Cleanup Day", "Great American Cleanup",
     "Clean Up the World", "Plastic Free July", "World Environment Day",
     "Arbor Day", "World Oceans Day", "World Water Day", "America Recycles Day",
@@ -149,7 +146,7 @@ def chat():
                            "Try asking about recycling, volunteering, or reducing waste!"
             })
 
-        # Generate response using Gemini 1.5
+        
         response = model.generate_content(
             user_input,
             generation_config=genai.types.GenerationConfig(
